@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -32,21 +31,19 @@ func init() {
 	db.AppConfig.NodeEnv = os.Getenv("NODE_ENV")
 }
 
-// Database configuration
-var DB *sql.DB
-
 func main() {
 
 	// Initialize the database connection
 	db.InitDB()
 
 	// Create tables
-	if err := db.CreateTables(DB); err != nil {
+	if err := db.CreateTables(db.GetDB()); err != nil {
 		log.Fatalf("Error creating tables: %v", err)
 	}
 
 	// Close the database connection when done
-	defer DB.Close()
+	defer db.GetDB().Close()
+	// ... Rest of your code
 	// Create a new Gorilla Mux router
 	r := mux.NewRouter()
 
