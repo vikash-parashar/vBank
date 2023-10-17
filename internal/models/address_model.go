@@ -2,6 +2,12 @@ package models
 
 import "github.com/google/uuid"
 
+const (
+	AddressTypeRent      = "Rent"
+	AddressTypeCurrent   = "Current"
+	AddressTypePermanent = "Permanent"
+)
+
 // Address model
 type Address struct {
 	ID            uuid.UUID `json:"id"`
